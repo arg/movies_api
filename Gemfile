@@ -7,6 +7,7 @@ gem 'rails', '~> 5.2.3'
 gem 'pg', '~> 1.1.0'
 gem 'puma', '~> 4.0.0'
 gem 'oj', '~> 3.8.0'
+gem 'acts_as_list', '~> 0.9.19'
 gem 'sidekiq', '~> 5.2.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
