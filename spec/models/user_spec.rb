@@ -1,5 +1,20 @@
 describe User do
   describe 'Associations' do
+    it { is_expected.to have_many(:purchases).dependent(:destroy) }
+
+    describe 'Association scopes' do
+      describe 'has_many :purchases -> active' do
+        let(:user) { create(:user) }
+
+        let(:active_purchase) { create(:purchase, user: user) }
+
+        let(:inactive_purchase) { create(:purchase, :inactive_purchase, user: user) }
+
+        subject { user.purchases }
+
+        it { is_expected.to contain_exactly(active_purchase) }
+      end
+    end
   end
 
   describe 'Validations' do
