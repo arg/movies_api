@@ -1,5 +1,3 @@
 describe Movie do
-  include_examples 'MovieValidations'
-
-  include_examples 'Purchasable'
+  it { is_expected.to be_kind_of(Item) }
 end

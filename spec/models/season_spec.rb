@@ -1,7 +1,5 @@
 describe Season do
-  include_examples 'MovieValidations'
-
-  include_examples 'Purchasable'
+  it { is_expected.to be_kind_of(Item) }
 
   describe 'Associations' do
     it { is_expected.to have_many(:episodes).order(position: :asc).dependent(:destroy) }

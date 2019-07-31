@@ -16,7 +16,7 @@ describe Purchase do
 
     it { is_expected.to belong_to(:user).required }
 
-    it { is_expected.to belong_to(:purchasable).required }
+    it { is_expected.to belong_to(:item).required }
   end
 
   describe 'Scopes' do
@@ -37,22 +37,22 @@ describe Purchase do
 
       let(:movie) { build(:movie) }
 
-      subject { user.purchases.create(purchasable: movie, option: :price) }
+      subject { user.purchases.create(item: movie, option: :price) }
 
       context 'When no same active purchases' do
         it { is_expected.to be_valid }
       end
 
       context 'When there is same active purchase' do
-        before { create(:purchase, user: user, purchasable: movie) }
+        before { create(:purchase, user: user, item: movie) }
 
         it { is_expected.not_to be_valid }
 
-        its(:errors, [:purchasable_id]) { is_expected.to contain_exactly('Purchasable has already been taken') }
+        its(:errors, [:item_id]) { is_expected.to contain_exactly('Item has already been taken') }
       end
 
       context 'When there is inactive purchase' do
-        before { create(:purchase, :inactive_purchase, user: user, purchasable: movie) }
+        before { create(:purchase, :inactive_purchase, user: user, item: movie) }
 
         it { is_expected.to be_valid }
       end
@@ -64,7 +64,7 @@ describe Purchase do
       end
 
       context 'When purchased by other user' do
-        before { create(:purchase, purchasable: movie) }
+        before { create(:purchase, item: movie) }
 
         it { is_expected.to be_valid }
       end

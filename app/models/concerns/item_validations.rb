@@ -1,4 +1,4 @@
-module MovieValidations
+module ItemValidations
   extend ActiveSupport::Concern
 
   included do

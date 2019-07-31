@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2019_07_22_125801) do
   enable_extension "plpgsql"
 
   create_table "episodes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "season_id"
+    t.uuid "season_id", null: false
     t.string "title", limit: 160, null: false
     t.string "plot", limit: 500, null: false
     t.datetime "created_at", null: false
@@ -26,31 +26,25 @@ ActiveRecord::Schema.define(version: 2019_07_22_125801) do
     t.index ["season_id"], name: "index_episodes_on_season_id"
   end
 
-  create_table "movies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "type", null: false
     t.string "title", limit: 160, null: false
     t.string "plot", limit: 500, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_items_on_type"
   end
 
   create_table "purchases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.string "purchasable_type", null: false
-    t.uuid "purchasable_id", null: false
+    t.uuid "item_id", null: false
     t.integer "option", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "expires_at", null: false
     t.index ["expires_at"], name: "index_purchases_on_expires_at"
-    t.index ["purchasable_type", "purchasable_id"], name: "index_purchases_on_purchasable_type_and_purchasable_id"
+    t.index ["item_id"], name: "index_purchases_on_item_id"
     t.index ["user_id"], name: "index_purchases_on_user_id"
-  end
-
-  create_table "seasons", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title", limit: 160, null: false
-    t.string "plot", limit: 500, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -60,6 +54,7 @@ ActiveRecord::Schema.define(version: 2019_07_22_125801) do
     t.index "lower((email)::text)", name: "index_users_on_lower_email", unique: true
   end
 
-  add_foreign_key "episodes", "seasons", on_delete: :cascade
+  add_foreign_key "episodes", "items", column: "season_id", on_delete: :cascade
+  add_foreign_key "purchases", "items", on_delete: :cascade
   add_foreign_key "purchases", "users", on_delete: :cascade
 end

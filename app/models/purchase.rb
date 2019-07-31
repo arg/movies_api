@@ -5,14 +5,13 @@ class Purchase < ApplicationRecord
 
   belongs_to :user
 
-  belongs_to :purchasable, polymorphic: true
+  belongs_to :item
 
   scope :active, -> { where('expires_at > ?', Time.current) }
 
   validates :option, presence: true
 
-  validates :purchasable_id, uniqueness: { scope: [:purchasable_type, :user_id],
-    conditions: -> { active } }
+  validates :item_id, uniqueness: { scope: [:user_id], conditions: -> { active } }
 
   before_create { self.expires_at ||= DURATION.from_now }
 end

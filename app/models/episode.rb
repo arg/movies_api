@@ -1,5 +1,5 @@
 class Episode < ApplicationRecord
-  include MovieValidations
+  include ItemValidations
 
   belongs_to :season
 

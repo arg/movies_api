@@ -1,5 +1,5 @@
 describe Episode do
-  include_examples 'MovieValidations'
+  include_examples 'Item Validations'
 
   describe 'Associations' do
     it { is_expected.to belong_to(:season) }

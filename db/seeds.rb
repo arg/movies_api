@@ -1,7 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+# movies
+movie1 = Movie.create!(title: Faker::Book.title, plot: Faker::Lorem.paragraph)
+movie2 = Movie.create!(title: Faker::Book.title, plot: Faker::Lorem.paragraph)
+# seasons
+season1 = Season.create!(title: Faker::Book.title, plot: Faker::Lorem.paragraph)
+season2 = Season.create!(title: Faker::Book.title, plot: Faker::Lorem.paragraph)
+# episodes
+Episode.create!(title: Faker::Book.title, plot: Faker::Lorem.paragraph, season: season1)
+Episode.create!(title: Faker::Book.title, plot: Faker::Lorem.paragraph, season: season1)
+Episode.create!(title: Faker::Book.title, plot: Faker::Lorem.paragraph, season: season1)
+Episode.create!(title: Faker::Book.title, plot: Faker::Lorem.paragraph, season: season2)
+Episode.create!(title: Faker::Book.title, plot: Faker::Lorem.paragraph, season: season2)
+# users
+user1 = User.create!(email: Faker::Internet.email)
+user2 = User.create!(email: Faker::Internet.email)
+# purchases
+movie1.purchase_by(user1, :price)
+season1.purchase_by(user1, :quality_hd)

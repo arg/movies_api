@@ -9,11 +9,11 @@ FactoryBot.define do
     end
 
     trait :with_purchased_movie do
-      association :purchasable, factory: :movie
+      association :item, factory: :movie
     end
 
     trait :with_purchased_season do
-      association :purchasable, factory: :season
+      association :item, factory: :season
     end
   end
 end

@@ -2,6 +2,8 @@ describe User do
   describe 'Associations' do
     it { is_expected.to have_many(:purchases).dependent(:destroy) }
 
+    it { is_expected.to have_many(:items).through(:purchases) }
+
     describe 'Association scopes' do
       describe 'has_many :purchases -> active' do
         let(:user) { create(:user) }

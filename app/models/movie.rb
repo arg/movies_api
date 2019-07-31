@@ -1,3 +1,2 @@
-class Movie < ApplicationRecord
-  include MovieValidations, Purchasable
+class Movie < Item
 end

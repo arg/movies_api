@@ -1,5 +1,3 @@
-class Season < ApplicationRecord
-  include MovieValidations, Purchasable
-
+class Season < Item
   has_many :episodes, -> { order(position: :asc) }, dependent: :destroy
 end
