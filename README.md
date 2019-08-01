@@ -1,24 +1,40 @@
-# README
+# Movies API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Endpoinsts
 
-Things you may want to cover:
+### User's profile
 
-* Ruby version
+`GET v1/users/:id`
 
-* System dependencies
+Params:
 
-* Configuration
+* `id` - user's id
 
-* Database creation
+### User's purchases
 
-* Database initialization
+#### List
 
-* How to run the test suite
+`GET v1/users/:id/purchases`
 
-* Services (job queues, cache servers, search engines, etc.)
+#### Add
 
-* Deployment instructions
+`POST v1/users/:id/purchases`
 
-* ...
+Params:
+
+* `item_id` - movie/season id
+* `option` - purchase option (price/quality_hd/quality_sd)
+
+### Library
+
+#### All items
+
+`GET v1/library/all`
+
+#### Movies only
+
+`GET v1/library/movies`
+
+#### Seasons only (+ episodes)
+
+`GET v1/library/seasons`
