@@ -3,7 +3,7 @@ class Purchase < ApplicationRecord
 
   enum option: { price: 0, quality_hd: 1, quality_sd: 2 }
 
-  belongs_to :user
+  belongs_to :user, touch: true
 
   belongs_to :item
 

@@ -15,5 +15,5 @@ Episode.create!(title: Faker::Book.title, plot: Faker::Lorem.paragraph, season: 
 user1 = User.create!(email: Faker::Internet.email)
 user2 = User.create!(email: Faker::Internet.email)
 # purchases
-movie1.purchase_by(user1, :price)
-season1.purchase_by(user1, :quality_hd)
+user1.purchases.create!(item: movie1, option: :price)
+user1.purchases.create!(item: season1, option: :quality_hd)

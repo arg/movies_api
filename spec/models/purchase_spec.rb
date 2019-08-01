@@ -14,7 +14,7 @@ describe Purchase do
   describe 'Associations' do
     subject { build(:purchase) }
 
-    it { is_expected.to belong_to(:user).required }
+    it { is_expected.to belong_to(:user).required.touch }
 
     it { is_expected.to belong_to(:item).required }
   end
